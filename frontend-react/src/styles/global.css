@@ -1,113 +1,15 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --text-normal: #1b1b1b;
+  --text-highlight: #000000;
+  --text-lighter: #4a4a4a;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --bg-primary: #ffffff;
+  --bg-secondary: #d0d0d0;
+  --bg-box: #f3f3f309;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --main-one: #416aff;
+  --main-two: #97aeff;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-body {
-  margin: 0;
-  padding-top: 40px;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-}
-
-.main-content {
-    max-width: 400px;
-    margin: 90px auto 0;
-}
-
-.main-navbar {
-    position: fixed;
-    top: 20px;
-
-    left: 50%;
-    transform: translateX(-50%);
-
-    width: calc(100% - 20px);
-    max-width: 400px;
-    padding: 6px;
-}
-
-.nav-app-title {
-    margin-bottom: 26px;
-}
-
-.nav-link-container {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px;
-    border-bottom: 1px solid #2e303a;
-}
-
-.footer-container {
-  border-top: 1px solid #2e303a;
-}
-.footer-container h4 {
-  font-weight: 400;
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-.nav-icons:hover {
-  color: #ffffff;
-}
-
-.nav-icons.active {
-  color: #ffffff;
-}
-
-.profile-pic {
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  box-shadow: 0 4px 10px black;
+  --border-one: #000000;
+  --border-two: #313131;
 }

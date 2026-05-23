@@ -8,13 +8,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Home from './pages/Home';
-import ProfilePage from './pages/ProfilePage';
-import Friends from './pages/Friends';
-import Search from './pages/Search';
-import Requests from './pages/Requests';
-import ProfileEdit from './pages/ProfileEdit';
-import ProfileSettings from './pages/ProfileSettings';
+import UserProfile from './pages/UserProfile';
 
 function AppRoutes() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -29,11 +23,6 @@ function AppRoutes() {
       <Route path="/login" element={ <PublicRoute><Login /></PublicRoute>} />
       <Route path="/home" element={ <PrivateRoute><Home /></PrivateRoute>} />
       <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
-      <Route path="/friends" element={<PrivateRoute><Friends /></PrivateRoute>} />
-      <Route path="/search" element={<PrivateRoute><Search /></PrivateRoute>} />
-      <Route path="/requests" element={<PrivateRoute><Requests /></PrivateRoute>} />
-      <Route path='/profile/edit' element={ <PrivateRoute><ProfileEdit /></PrivateRoute> } />
-      <Route path='/profile/settings' element={ <PrivateRoute><ProfileSettings /></PrivateRoute> } />
     </Routes>
     <Footer />
     </main>
