@@ -30,7 +30,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         return user
 
 
-class OwnProfileSerializer(serializers.ModelSerializer):
+class OwnProfileEditSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'profile_pic', 'username', 'first_name', 'last_name', 'email', 'mobile_number', 'date_of_birth']
@@ -54,30 +54,3 @@ class OwnProfileViewSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'profile_pic', 'username', 'first_name', 'last_name', 'email', 'mobile_number', 'date_of_birth']
-
-
-class UserSearchSerializer(serializers.ModelSerializer):
-    friendship_status = serializers.SerializerMethodField()
-
-    class Meta:
-        model = User
-        fields = [
-            'id',
-            'username',
-            'profile_pic',
-            'friendship_status'
-        ]
-
-    def get_friendship_status(self, obj):
-
-        request_user = self.context['request'].user
-
-        friendship = Friendship.objects.filter(
-            Q(sender=request_user, receiver=obj) |
-            Q(sender=obj, receiver=request_user)
-        ).first()
-
-        if not friendship:
-            return None
-
-        return friendship.status

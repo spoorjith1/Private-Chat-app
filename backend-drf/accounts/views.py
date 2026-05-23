@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import User
-from .serializers import UserRegistrationSerializer, OwnProfileViewSerializer, OwnProfileSerializer, UserSearchSerializer
+from .serializers import UserRegistrationSerializer, OwnProfileViewSerializer, OwnProfileEditSerializer
 from rest_framework import generics
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.db.models import Q
@@ -22,7 +22,7 @@ class OwnProfileView(generics.RetrieveAPIView):
     
 class OwnProfileEditView(generics.UpdateAPIView):
     queryset = User.objects.all()
-    serializer_class = OwnProfileSerializer
+    serializer_class = OwnProfileEditSerializer
     permission_classes = [IsAuthenticated]
     
     def get_object(self):
@@ -39,16 +39,3 @@ class OwnProfileDeleteView(generics.DestroyAPIView):
     
     def get_object(self):
         return self.request.user
-
-
-class UserSearchView(generics.ListAPIView):
-    serializer_class = UserSearchSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        search = self.request.query_params.get('search', '')
-        queryset = User.objects.exclude(id=self.request.user.id)
-        
-        if search:
-            queryset = queryset.filter(username__icontains=search)
-        return queryset
