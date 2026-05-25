@@ -13,3 +13,256 @@
   --border-one: #000000;
   --border-two: #313131;
 }
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    min-height: 100vh;
+    font-family: sans-serif;
+}
+
+html{
+    overflow-y: scroll;
+}
+
+.main-content {
+    width: 100%;
+    max-width: 400px;
+    margin: 90px auto 0;
+}
+
+.page-container{
+    min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  padding-top: 20px;
+  background-color: var(--code-bg);
+  color: var(--text);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/*Navbar*/
+.navbar-main {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    max-width: 400px;
+    width: 100%;
+    background-color: var(--main-two);
+}
+.navbar-title {
+    font-size: 2.2rem;
+    color: var(--text-highlight);
+    padding-left: 0.2rem;
+    margin-bottom: 1.1rem;
+}
+
+.navbar-links-box {
+    padding: 0.3rem;
+    padding-bottom: 0.6rem;
+}
+
+.navbar-links {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ffffff2b;
+    padding: 0.2rem 0.3rem;
+    border-radius: 0.4rem;
+    background-color: #ffffff2b;
+}
+
+.nav-icons {
+    color: var(--text-highlight);
+}
+
+.nav-icons.active {
+    color: var(--main-one);
+}
+
+.footer-container {
+    border-top: 1px solid var(--border-two);
+    padding: 0.6rem 2rem 2rem;
+}
+.footer-h3 {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-highlight);
+    padding-bottom: 0.4rem;
+}
+.footer-p {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-lighter);
+}
+
+
+/*profile page*/
+.user-username {
+    padding: 1rem 0.3rem 0.6rem;
+    font-size: 1.6rem;
+}
+.user-profile-top {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    padding-left: 0.3rem;
+    margin-bottom: 1rem;
+}
+
+.user-profile-pic {
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+}
+
+.user-friends-count-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: var(--main-one);
+}
+.user-friends-count-box:hover {
+    text-decoration: 1px solid underline;
+}
+.user-friends-count-number {
+    font-size: 2.3rem;
+    color: var(--main-one);
+    text-decoration: none;
+}
+.user-friends-count-text {
+    text-decoration: none;
+    font-size: 1rem;
+}
+.user-full-name {
+    border-bottom: 1px solid var(--border-two);
+    font-size: 1.2rem;
+    padding-left: 0.3rem;
+    padding-bottom: 1rem;
+}
+
+
+/*settings page*/
+.user-profile-configs {
+    border-bottom: 1px solid var(--border-two);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.user-conf-btns {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: var(--text-lighter);
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+.user-conf-btns:hover {
+    text-decoration: 1px solid underline;
+    color: var(--main-one)
+}
+
+.conf-title {
+    padding-top: 1rem;
+    padding-bottom: 0.3rem;
+}
+
+.conf-box {
+    background-color: var(--bg-secondary);
+    margin-top: 0.3rem;
+}
+.conf-box:hover {
+    background-color: #ffb2b2;
+}
+
+.conf-logout {
+    padding: 1rem 0.3rem;
+    border: none;
+    background: none;
+}
+.conf-delete-acc {
+    padding: 1rem 0.3rem;
+    border: none;
+    background: none;
+}
+
+
+/*edit page*/
+.edit-page {
+    padding: 0.5rem;
+}
+
+.edit-title {
+    padding-top: 1rem;
+}
+
+.edit-form-container {
+    border: 1px solid var(--border-two);
+    padding: 0.3rem;
+    border-radius: 0.4rem;
+    background-color: #fff9f9;
+}
+
+.edit-main-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-bottom: 1rem;
+}
+.edit-boxes {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.1rem;
+}
+
+.edit-form-label {
+    color: var(--text-lighter);
+    font-size: 0.9rem;
+}
+
+.profile-input {
+    padding-bottom: 0.9rem;
+}
+
+.edit-hr {
+    margin-bottom: 0.6rem;
+}
+
+.edit-profile-pic {
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+}
+
+.edit-inputs {
+    border: none;
+    border-bottom: 1px solid var(--border-one);
+    padding: 0.2rem;
+}
+
+.edit-btn {
+    width: 100%;
+    padding: 0.4rem;
+    margin-top: 0.6rem;
+    background-color: var(--main-one);
+    border: none;
+    border-radius: 0.2rem;
+}
+.edit-btn:hover {
+    opacity: 0.95;
+}
