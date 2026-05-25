@@ -4,6 +4,7 @@ from django.db.models import Q
 from friendships.models import Friendship
 
 
+#own profile
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, min_length=8, style={'input_type': 'password'})
     email = serializers.EmailField(required=True)
@@ -51,14 +52,27 @@ class OwnProfileEditSerializer(serializers.ModelSerializer):
 
 
 class OwnProfileViewSerializer(serializers.ModelSerializer):
+    friends_count = serializers.SerializerMethodField()
     class Meta:
         model = User
-        fields = ['id', 'profile_pic', 'username', 'first_name', 'last_name', 'email', 'mobile_number', 'date_of_birth']
+        fields = ['id', 'profile_pic', 'username', 'first_name', 'last_name', 'email', 'mobile_number', 'date_of_birth', 'friends_count']
+    
+    def get_friends_count(self, obj):
+        return Friendship.objects.filter(Q(sender=obj) | Q(receiver=obj), status=Friendship.Status.ACCEPTED).count()
 
 
-class OtherUsers(serializers.ModelSerializer):
-    pass
+#others profile
+class OtherUsersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'profile_pic', 'username', 'first_name', 'last_name', 'status']
 
 
-class OthersProfileView(serializers.ModelSerializer):
-    pass
+class OthersProfileSerailizer(serializers.ModelSerializer):
+    friends_count = serializers.SerializerMethodField()
+    class Meta:
+        model = User
+        fields = ['id', 'profile_pic', 'username', 'first_name', 'last_name', 'friends_count']
+    
+    def get_friends_count(self, obj):
+        return Friendship.objects.filter(Q(sender=obj) | Q(receiver=obj), status=Friendship.Status.ACCEPTED).count()

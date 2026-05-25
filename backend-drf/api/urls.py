@@ -16,4 +16,8 @@ urlpatterns = [
     path('profile/me/', AccViews.OwnProfileView.as_view(), name='my_profile'),
     path('profile/me/edit/', AccViews.OwnProfileEditView.as_view(), name='my_profile_edit'),
     path('profile/me/delete/', AccViews.OwnProfileDeleteView.as_view(), name='my_profile_delete'),
+    
+    #Other Users
+    path('users/', AccViews.UsersListView.as_view(), name='users_list'),
+    path('user/<int:id>/', AccViews.OthersProfileView.as_view(), name='others_profile'),
 ]
