@@ -3,87 +3,76 @@ from .models import Friendship
 from accounts.models import User
 
 
-class SendFriendRequestSerializer(serializers.ModelSerializer):
-    receiver = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
-    
-    class Meta:
-        model = Friendship
-        fields = ['receiver']
-        
-    def validate(self, attrs):
-        sender = self.context['request'].user
-        receiver = attrs['receiver']
-        
-        if sender == receiver:
-            raise serializers.ValidationError("You cannot send request to yourself")
-        
-        if Friendship.objects.filter(sender=sender, receiver=receiver).exists():
-            raise serializers.ValidationError("request already sent")
-        
-        if Friendship.objects.filter(sender=receiver, receiver=sender).exists():
-            raise serializers.ValidationError("This user already sent you a request")
-        
-        return attrs
-    
-    def create(self, validated_data):
-        sender = self.context['request'].user
-        
-        friendship = Friendship.objects.create(sender=sender, receiver=validated_data['receiver'])
-        return friendship
-
-
-class FriendshipSerializer(serializers.ModelSerializer):
-    user_id = serializers.SerializerMethodField()
-    username = serializers.SerializerMethodField()
-    profile_pic = serializers.SerializerMethodField()
-    
+class FriendRequestSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField(source='sender.id', read_only=True)
+    username = serializers.CharField(source='sender.id', read_only=True)
+    profile_pic = serializers.ImageField(source='sender.profile_pic', read_only=True)
     class Meta:
         model = Friendship
         fields = ['id', 'user_id', 'username', 'profile_pic', 'status', 'created_at']
+    
+    def validate(self, data):
+        request = self.context.get('request')
+        sender = request.user
+        receiver = self.context.get('receiver')
         
+        if sender == receiver:
+            raise serializers.ValidationError("You cannot send request to your self")
+        
+        existing_request = Friendship.objects.filter(sender=sender, receiver=receiver).first()
+        if existing_request:
+            if existing_request.status == Friendship.Status.PENDING:
+                raise serializers.ValidationError("Request already sent")
+            if existing_request.status == Friendship.Status.ACCEPTED:
+                raise serializers.ValidationError("Already friends")
+            if existing_request.status == Friendship.Status.REJECTED:
+                existing_request.delete()
+                
+        reverse_request = Friendship.objects.filter(sender=receiver, receiver=sender, status=Friendship.Status.PENDING).first()
+        if reverse_request:
+            raise serializers.ValidationError("The person already sent you request")
+        return data
+
+
+class ListRequestsSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField(source='sender.id', read_only=True)
+    username = serializers.CharField(source='sender.id', read_only=True)
+    profile_pic = serializers.ImageField(source='sender.profile_pic', read_only=True)
+    class Meta:
+        model = Friendship
+        fields = ['id', 'user_id', 'username', 'profile_pic', 'status', 'created_at']
+
+
+class ListFriendsSerializer(serializers.ModelSerializer):
+    user_id = serializers.SerializerMethodField()
+    username = serializers.SerializerMethodField()
+    profile_pic = serializers.SerializerMethodField()
+    class Meta:
+        model = Friendship
+        fields = ['id', 'user_id', 'username', 'profile_pic', 'status', 'created_at']
+    
+    def get_friend_user(self, obj):
+        request = self.context.get('request')
+        if obj.sender == request.user:
+            return obj.receiver
+        return obj.sender
+    
     def get_user_id(self, obj):
-        request_user = self.context['request'].user
-        if obj.sender == request_user:
-            return obj.receiver.id
-        return obj.sender.id
+        friend = self.get_friend_user(obj)
+        return friend.id
     
     def get_username(self, obj):
-        request_user = self.context['request'].user
-        if obj.sender == request_user:
-            return obj.receiver.username
-        return obj.sender.username
+        friend = self.get_friend_user(obj)
+        return friend.username
     
     def get_profile_pic(self, obj):
-        request_user = self.context['request'].user
-        if obj.sender == request_user:
-            if obj.receiver.profile_pic:
-                return obj.receiver.profile_pic.url
-            return None
-        if obj.sender.profile_pic:
-            return obj.sender.profile_pic.url
+        friend = self.get_friend_user(obj)
+        if friend.profile_pic:
+            return friend.profile_pic.url
         return None
 
 
-class RespondFriendRequestSerializer(serializers.ModelSerializer):
+class FriendShipStatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Friendship
-        fields = ['status']
-
-    def validate_status(self, value):
-        if value not in ['accepted', 'rejected']:
-            raise serializers.ValidationError("Status must be accepted or rejected.")
-        return value
-
-    def update(self, instance, validated_data):
-        request_user = self.context['request'].user
-
-        if instance.receiver != request_user:
-            raise serializers.ValidationError("You cannot respond to this request.")
-
-        if instance.status != Friendship.Status.PENDING:
-            raise serializers.ValidationError("This request has already been handled.")
-
-        instance.status = validated_data['status']
-        instance.save()
-
-        return instance
+        fields = ['id', 'status']

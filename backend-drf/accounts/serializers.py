@@ -65,7 +65,7 @@ class OwnProfileViewSerializer(serializers.ModelSerializer):
 class OtherUsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'profile_pic', 'username', 'first_name', 'last_name', 'status']
+        fields = ['id', 'profile_pic', 'username', 'first_name', 'last_name']
 
 
 class OthersProfileSerailizer(serializers.ModelSerializer):

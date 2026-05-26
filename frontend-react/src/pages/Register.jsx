@@ -41,34 +41,38 @@ function Register() {
   }
 
   return (
-    <div className='page-container'>
-      <h2 className='title'>Z Lite</h2>
-      <div className='sign-in-up-box'>
-        <h2 className='sign-in-up-h2'>Register</h2>
-        <form onSubmit={handleRegister}>
-          <div className='form-group'>
-            <label>Email : </label>
-            <input type='email' placeholder='myemail@gmail.com' value={email} onChange={(e)=> setEmail(e.target.value)} className='inputs' />
-            <small>{errors.email && <div className='text-danger'>{errors.email}</div>}</small>
-          </div>
-          <div className='form-group'>
-            <label>username : </label>
-            <input type='text' placeholder='myname' value={username} onChange={(e)=> setUsername(e.target.value)} className='inputs' />
-            <small>{errors.username && <div className='text-danger'>{errors.username}</div>}</small>
-          </div>
-          <div className='form-group'>
-            <label>password : </label>
-            <input type='password' placeholder='password123#$%' value={password} onChange={(e)=> setPassword(e.target.value)} className='inputs register-pwd' />
-            <small>{errors.password && <div className='text-danger'>{errors.password}</div>}</small>
-            {generalError && (<div className='text-danger'>{generalError}</div>)}
-          </div>
-          {loading ?
-          (<button type='submit' className='btn sign-in-up-btn' disabled>Registering...</button>)
-          : 
-          (<button type='submit' className='btn sign-in-up-btn'>Register</button>)
-          }
-        </form>
-        <div className='sign-in-up-alter'>Already have an account? <Link to='/login' className='alter-link'>Login</Link></div>
+    <div className='page-container sign-page'>
+      <h2 className='title'>Chat App</h2>
+      <div className='sign-container'>
+        <div className='sign-box'>
+          <h2 className='sign-title'>Register</h2>
+          <form onSubmit={handleRegister}>
+            <div className='input-container'>
+              <div className='input-group'>
+                <label className='form-label'>email</label>
+                <input type='email' value={email} onChange={(e)=> setEmail(e.target.value)} className='inputs' />
+                <small>{errors.email && <div className='sign-errors'>{errors.email}</div>}</small>
+              </div>
+              <div className='input-group'>
+                <label className='form-label'>username</label>
+                <input type='text' value={username} onChange={(e)=> setUsername(e.target.value)} className='inputs' />
+                <small>{errors.username && <div className='sign-errors'>{errors.username}</div>}</small>
+              </div>
+              <div className='input-group'>
+                <label className='form-label'>password</label>
+                <input type='password' value={password} onChange={(e)=> setPassword(e.target.value)} className='inputs' />
+                <small>{errors.password && <div className='sign-errors'>{errors.password}</div>}</small>
+                {generalError && (<div className='sign-errors'>{generalError}</div>)}
+              </div>
+            </div>
+            {loading ?
+            (<button type='submit' className='sign-btn' disabled>Registering...</button>)
+            : 
+            (<button type='submit' className='sign-btn'>Register</button>)
+            }
+          </form>
+          <p className='sign-alter'>Already have an account? <Link to='/login' className='alter-link'>Login</Link></p>
+        </div>
       </div>
     </div>
   )

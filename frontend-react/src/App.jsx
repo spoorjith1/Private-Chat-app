@@ -15,6 +15,7 @@ import Notifications from './pages/Notifications'
 import ProfileEdit from './pages/ProfileEdit'
 import ProfileSettings from './pages/ProfileSettings'
 import FriendsList from './pages/FriendsList'
+import OthersProfile from './pages/OthersProfile'
 
 function AppRoutes() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -34,6 +35,7 @@ function AppRoutes() {
       <Route path="/profile/edit" element={<PrivateRoute><ProfileEdit /></PrivateRoute>} />
       <Route path="/profile/settings" element={<PrivateRoute><ProfileSettings /></PrivateRoute>} />
       <Route path="/friends/list" element={<PrivateRoute><FriendsList /></PrivateRoute>} />
+      <Route path="/user/:id" element={<PrivateRoute><OthersProfile /></PrivateRoute>} />
     </Routes>
     <Footer />
     </main>

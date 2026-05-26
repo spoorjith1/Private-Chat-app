@@ -51,27 +51,30 @@ function Login() {
 
   return (
     <div className='page-container'>
-      <h2 className='title'>Z Lite</h2>
-      <div className='sign-in-up-box'>
-        <h2 className='sign-in-up-h2'>Login</h2>
-        <form onSubmit={handleLogin}>
-          <div className='form-group'>
-            <label>username : </label>
-            <input type='text' placeholder='username' value={username} onChange={(e)=> setUsername(e.target.value)} className='inputs'/>
-          </div>
-          <div className='form-group'>
-            <label>Password : </label>
-            <input type='password' placeholder='password123#$%' value={password} onChange={(e)=> setPassword(e.target.value)}  className='inputs' />
-          </div>
-          {error && <div className='text-danger'>{error}</div>}
-          <br />
-          {loading ? 
-          (<button type='submit' className='btn sign-in-up-btn' disabled>Logging In...</button>) 
-          : 
-          (<button type='submit' className='btn sign-in-up-btn'>Login</button>)
-          }
-        </form>
-        <div className='sign-in-up-alter'>New to Z Lite? <Link to='/register' className='alter-link'>Register</Link></div>
+      <h2 className='title'>Chat App</h2>
+      <div className='sign-container'>
+        <div className='sign-box'>
+          <h2 className='sign-title'>Login</h2>
+          <form onSubmit={handleLogin}>
+            <div className='input-container'>
+              <div className='input-group'>
+                <label className='form-label'>username</label>
+                <input type='text' value={username} onChange={(e)=> setUsername(e.target.value)} className='inputs'/>
+              </div>
+              <div className='input-group'>
+                <label className='form-label'>password</label>
+                <input type='password' value={password} onChange={(e)=> setPassword(e.target.value)}  className='inputs' />
+              </div>
+            </div>
+            <small>{error && <div className='sign-errors'>{error}</div>}</small>
+            {loading ? 
+            (<button type='submit' className='sign-btn' disabled>Logging In...</button>) 
+            : 
+            (<button type='submit' className='sign-btn'>Login</button>)
+            }
+          </form>
+          <p className='sign-alter'>New to Chat App? <Link to='/register' className='alter-link'>Register</Link></p>
+        </div>
       </div>
     </div>
   )

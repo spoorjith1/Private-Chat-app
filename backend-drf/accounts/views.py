@@ -50,7 +50,7 @@ class UsersListView(generics.ListAPIView):
     search_fields = ['username', 'first_name', 'last_name']
     
     def get_queryset(self):
-        return User.objects.exclude(id=self.request.user.id)
+        return User.objects.exclude(id=self.request.user.id).order_by('-created_at')
 
 
 class OthersProfileView(generics.RetrieveAPIView):
