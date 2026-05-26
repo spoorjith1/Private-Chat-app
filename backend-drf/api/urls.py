@@ -22,7 +22,7 @@ urlpatterns = [
     path('user/<int:id>/', AccViews.OthersProfileView.as_view(), name='others_profile'),
     
     #Friends ships
-    path('friends/status/<int:id>/', FrdShipsViews.FriendShipStatusView.as_view(), name='friends_status'),
+    path('friend/status/<int:id>/', FrdShipsViews.FriendShipStatusView.as_view(), name='friends_status'),
     path('friend/request/<int:id>/', FrdShipsViews.FriendRequestView.as_view(), name='friend_request'),
     path('friends/requests/', FrdShipsViews.ListRequestsView.as_view(), name='list_requests'),
     path('friend/request/accept/<int:id>/', FrdShipsViews.RequestAcceptView.as_view(), name='accept_request'),

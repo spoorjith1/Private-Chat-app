@@ -36,7 +36,7 @@ class FriendRequestSerializer(serializers.ModelSerializer):
 
 class ListRequestsSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(source='sender.id', read_only=True)
-    username = serializers.CharField(source='sender.id', read_only=True)
+    username = serializers.CharField(source='sender.username', read_only=True)
     profile_pic = serializers.ImageField(source='sender.profile_pic', read_only=True)
     class Meta:
         model = Friendship
