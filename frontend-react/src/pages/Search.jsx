@@ -65,8 +65,8 @@ function Search() {
         ))}
       </div>
 
-      <div>
-        {loadMore && (<button onClick={()=> fetchUsers(loadMore)}>Load More</button>)}
+      <div className='load-more-box'>
+        {loadMore && (<button onClick={()=> fetchUsers(loadMore)} className='load-more-btn'>Load More</button>)}
       </div>
     </div>
   )

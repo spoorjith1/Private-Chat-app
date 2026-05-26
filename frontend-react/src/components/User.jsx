@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import FriendRequest from './FriendRequest'
 
 
 function User({ user }) {
@@ -13,7 +14,7 @@ function User({ user }) {
           <p className='others-fullname'>{user.first_name} {user.last_name}</p>
         </div>
       </div>
-        <button>Add Friend</button>
+        <FriendRequest userId={user.id} />
     </div>
   )
 }
