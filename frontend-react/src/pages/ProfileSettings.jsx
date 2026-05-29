@@ -32,9 +32,14 @@ function ProfileSettings() {
         </div>
       ) : (
         <div className='delete-acc-confirm'>
-          <p>Are you sure you want to Delete your Account?</p>
-          <button onClick={()=> navigate('/profile')} className='confirmation no'>No</button>
-          <button onClick={handleDelete} className='confirmation yes'>Yes</button>
+          <p className='confirm-text'>Are you sure you want to Delete your Account?</p>
+          <div className='confirm-note-box'>
+            <p className='confirm-note-text'><b>NOTE :</b> Once you delete your account. all you account data will permanently deleted, you cannot access your account anymore and you cannot retrieve the account.</p>
+          </div>
+          <div className='confirm-btn-box'>
+            <button onClick={()=> navigate('/profile')} className='confirmation-btns no'>No, cancel</button>
+            <button onClick={handleDelete} className='confirmation-btns yes'>Yes, delete</button>
+          </div>
         </div>
       )}
     </div>

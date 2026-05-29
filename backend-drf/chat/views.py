@@ -4,6 +4,7 @@ from .models import Conversation, Message
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
 from django.db.models import Q
+from rest_framework.response import Response
 
 
 class ConversationListView(generics.ListAPIView):
@@ -16,6 +17,12 @@ class ConversationListView(generics.ListAPIView):
 class CreateConversationView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = CreateConversationSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        conversation = serializer.save()
+        return Response({"id": conversation.id})
 
 
 class MessageListView(generics.ListAPIView):
@@ -36,3 +43,11 @@ class SendMessageView(generics.CreateAPIView):
         conversation = Conversation.objects.filter(id=self.kwargs['pk'], users=self.request.user).first()
         context['conversation'] = conversation
         return context
+
+
+class ConversationDetailView(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ConversationSerializer
+
+    def get_object(self):
+        return Conversation.objects.filter(id=self.kwargs['pk'], users=self.request.user).first()

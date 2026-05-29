@@ -2,6 +2,7 @@ from django.urls import path
 from rest_framework_simplejwt import views as JwtViews
 from accounts import views as AccViews
 from friendships import views as FrdShipsViews
+from chat import views as ChatViews
 
 
 urlpatterns = [
@@ -28,4 +29,11 @@ urlpatterns = [
     path('friend/request/accept/<int:id>/', FrdShipsViews.RequestAcceptView.as_view(), name='accept_request'),
     path('friend/request/reject/<int:id>/', FrdShipsViews.RequestRejectView.as_view(), name='reject_request'),
     path('friends/list/', FrdShipsViews.ListFriendsView.as_view(), name='list_friends'),
+    
+    #Chat - conversation & message
+    path('chats/', ChatViews.ConversationListView.as_view(), name='all_chats'),
+    path('chat/', ChatViews.CreateConversationView.as_view(), name='user_chat'),
+    path('messages/<int:pk>/', ChatViews.MessageListView.as_view(), name='all_messages'),
+    path('message/<int:pk>/', ChatViews.SendMessageView.as_view(), name='new_message'),
+    path('chat/details/<int:pk>/', ChatViews.ConversationDetailView.as_view(), name='chat_user'),
 ]
