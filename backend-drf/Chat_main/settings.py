@@ -45,8 +45,8 @@ INSTALLED_APPS = [
     'api',
     'accounts',
     'friendships',
-    'chat',
     'django_filters',
+    'chat',
 ]
 
 MIDDLEWARE = [
