@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import axiosInstance from '../axiosInstance'
 import Message from '../components/Message'
@@ -56,6 +56,8 @@ function ChatPage() {
   if (loading) {
     return <div className='page-container'>Loading...</div>
   }
+
+  console.log(messages)
   return (
     <div className='page-container chat-page'>
       {error && <div>{error}</div>}
@@ -65,12 +67,12 @@ function ChatPage() {
         <h3 className='chat-username'>{conversation?.username}</h3>
       </div>
 
-      <div>
+      <div className='messages-container'>
         {messages.length === 0 ? (
           <div className='no-messages-msg'>Say Hi 👋</div>
         ) : (
           messages.map((message) => (
-            <Message key={message.id} message={message} isMine={ message.sender === user?.id }/>
+              <Message key={message.id} message={message} isMine={ message.sender === user?.id }/>
           ))
         )}
       </div>
