@@ -26,9 +26,9 @@ The backend is developed using Django REST Framework, while the frontend is buil
 
 ## Screenshots
 <img src="screenshots/chatapp1.png" width="700"/>
-<img src="screenshots/chatapp2.png" width="700"/>
-<img src="screenshots/chatapp3.png" width="700"/>
 <img src="screenshots/chatapp4.png" width="700"/>
+<img src="screenshots/chatapp3.png" width="700"/>
+<img src="screenshots/chatapp2.png" width="700"/>
 
 ## Tech Stack
 
