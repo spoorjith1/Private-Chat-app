@@ -7,7 +7,7 @@ This project is a full-stack private chat application with one-to-one private me
 The application allows users to send and accept/reject friend requests, private messaging with their friends with secure authentication.  
 The backend is developed using Django REST Framework, while the frontend is built with React.js.
 
-**NOTE** This project currently uses REST APIs for messaging. Real-time messaging using Django Channels/WebSockets i am planning on adding them soon.
+>**NOTE :** This project currently uses REST APIs for messaging. Real-time messaging using Django Channels/WebSockets i am planning on adding them soon.
 
 ## Features
 - User Registration
